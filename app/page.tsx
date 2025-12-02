@@ -2,13 +2,27 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { ChevronRight } from "lucide-react";
+import { Playfair } from "next/font/google";
+
+const playfair = Playfair({
+  variable: "--font-playfair",
+  subsets: ["vietnamese", "latin"]
+})
 
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex flex-col">
         {/* Video */}
-        <Skeleton className="w-dvw h-dvh bg-red-500" />
+        {/* <Skeleton className="w-dvw h-dvh bg-red-500" /> */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="inset-0 w-dvw h-dvh object-cover"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen-Recording-2023-11-23-at-11.06.19-Ktsc7opohTZXD1skm3MNVcihII7xI4.mp4"
+        />
 
         {/* About us */}
         <section className="w-dvw min-h-dvh max-h-dvh flex justify-center items-center px-[16%]">
@@ -38,10 +52,10 @@ function AboutUsCard() {
             <span className="inline-block px-4 py-2 border border-slate-400 rounded-full text-slate-600 font-medium text-sm mb-4">
               VỀ CHÚNG TÔI
             </span>
-            <h2 className="text-2xl lg:text-3xl font-playfair font-bold text-slate-900 mb-2">
+            <h2 className={`text-2xl lg:text-3xl ${playfair.className} font-bold text-slate-900 mb-2`}>
               CÔNG TY CỔ PHẦN ĐẦU TƯ PHÁT TRIỂN DỊCH VỤ
             </h2>
-            <h2 className="text-4xl lg:text-5xl font-playfair font-bold text-primary mb-6">KIẾN AN</h2>
+            <h2 className={`text-4xl lg:text-5xl ${playfair.className} font-playfair font-bold text-primary mb-6`}>KIẾN AN</h2>
 
           </div>
 
@@ -56,8 +70,8 @@ function AboutUsCard() {
           <Button className="w-fit" size="lg">Tìm hiểu thêm <span>→</span></Button>
         </Card>
         <div className="w-full" />
-      </div>
-    </div>
+      </div >
+    </div >
   )
 }
 

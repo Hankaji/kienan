@@ -24,7 +24,7 @@ const JobCard: React.FC<JobCardProps> = ({
       )}
     >
       <div
-        className="absolute inset-0 z-10 h-full w-full bg-[#252839] -translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0"
+        className="absolute inset-0 z-10 h-full w-full bg-[#252839] -translate-y-[99%] transition-transform duration-500 ease-out group-hover:translate-y-0"
       />
 
       <CardContent className="relative z-20 h-full w-full p-0">
@@ -34,7 +34,7 @@ const JobCard: React.FC<JobCardProps> = ({
         />
 
         <div
-          className="absolute left-1/2 top-[56%] h-[100px] w-[100px] -translate-x-[130%] -translate-y-[160%]"
+          className="absolute left-1/2 top-[56%] h-[100px] w-[100px] -translate-x-[130%] -translate-y-[160%] transition-all duration-300 group-hover:scale-80"
         >
           <Image
             width={64}

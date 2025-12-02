@@ -1,8 +1,14 @@
+'use client'
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
-import { ChevronRight } from "lucide-react";
+import YouTubeModal from "@/components/youtube-modal";
+import { cn } from "@/lib/utils";
+import { ArrowRight, ChevronRight } from "lucide-react";
 import { Playfair } from "next/font/google";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const playfair = Playfair({
   variable: "--font-playfair",
@@ -25,9 +31,7 @@ export default function Home() {
         />
 
         {/* About us */}
-        <section className="w-dvw min-h-dvh max-h-dvh flex justify-center items-center px-[16%]">
-          <AboutUsCard />
-        </section>
+        <AboutUsCard />
 
         {/* Services */}
         <section className="py-20 bg-white">
@@ -45,33 +49,76 @@ export default function Home() {
 
 function AboutUsCard() {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <Card className="space-y-6 bg-white/70 backdrop-blur-sm p-8 rounded-2xl border border-white/50 shadow-lg">
-          <div>
-            <span className="inline-block px-4 py-2 border border-slate-400 rounded-full text-slate-600 font-medium text-sm mb-4">
-              VỀ CHÚNG TÔI
-            </span>
-            <h2 className={`text-2xl lg:text-3xl ${playfair.className} font-bold text-slate-900 mb-2`}>
-              CÔNG TY CỔ PHẦN ĐẦU TƯ PHÁT TRIỂN DỊCH VỤ
-            </h2>
-            <h2 className={`text-4xl lg:text-5xl ${playfair.className} font-playfair font-bold text-primary mb-6`}>KIẾN AN</h2>
+    <section className="relative py-20 min-h-screen flex items-center overflow-hidden bg-gradient-to-b from-white to-slate-50">
+      <div className="absolute inset-0 z-0">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/images/bg-about-us.jpg"
+            alt="Background About Us"
+            fill
+            className="object-cover object-right"
+            priority
+          />
+        </div>
 
-          </div>
+        {/* Gradient overlay left-to-right */}
+        <div className="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent"></div>
 
-          <div className="space-y-4 text-slate-700 text-base leading-relaxed">
-            <p>
-              <strong>Kiến An Service</strong> là đơn vị cung cấp giải pháp toàn diện cho khách hàng, chuẩn mực trong lĩnh vực quản lý, vận hành bất động sản, quản lý khách sạn và lưu trú.</p>
-            <p>Kiến An cam kết là đơn vị có năng lực vận hành tiên phong, luôn sẵn sàng cung cấp các dịch vụ tối ưu, thuận tiện và hài hòa cho cộng đồng cư dân.</p>
-            <div className="border-l-4 border-primary pl-4 py-2 bg-primary/5 rounded">
-              <p className="text-primary font-semibold italic">{"\""}Không có 2 tài sản, khách hàng nào giống nhau{"\""}</p>
+        {/* Bottom gradient fade */}
+        <div className="absolute bottom-0 inset-x-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6 bg-white/70 backdrop-blur-sm p-8 rounded-2xl border border-white/50 shadow-lg">
+
+            {/* Header Section */}
+            <div>
+              <span className={cn("inline-block px-4 py-2 border border-slate-400 rounded-full text-slate-600 font-medium text-sm mb-4")}>
+                VỀ CHÚNG TÔI
+              </span>
+              <h2 className={cn(playfair.className, "text-2xl lg:text-3xl font-playfair font-bold text-slate-900 mb-2")}>
+                CÔNG TY CỔ PHẦN ĐẦU TƯ PHÁT TRIỂN DỊCH VỤ
+              </h2>
+              <h2 className={cn(playfair.className, "text-4xl lg:text-5xl font-playfair font-bold text-primary mb-6")}>
+                KIẾN AN
+              </h2>
             </div>
-            <p className="text-sm">Đó là lý do chúng tôi cung cấp các giải pháp quản lý, vận hành phù hợp để đáp ứng nhu cầu riêng của quý vị</p></div>
-          <Button className="w-fit" size="lg">Tìm hiểu thêm <span>→</span></Button>
-        </Card>
-        <div className="w-full" />
+
+            <div className="space-y-4 text-slate-700 text-base leading-relaxed">
+              <p>
+                <strong>Kiến An Service</strong> là đơn vị cung cấp giải pháp toàn diện
+                cho khách hàng, chuẩn mực trong lĩnh vực quản lý, vận hành bất động sản,
+                quản lý khách sạn và lưu trú.
+              </p>
+              <p>
+                Kiến An cam kết là đơn vị có năng lực vận hành tiên phong, luôn sẵn sàng
+                cung cấp các dịch vụ tối ưu, thuận tiện và hài hòa cho cộng đồng cư dân.
+              </p>
+
+              <div className="border-l-4 border-primary pl-4 py-2 bg-primary/5 rounded">
+                <p className="text-primary font-semibold italic">
+                  {"\""}Không có 2 tài sản, khách hàng nào giống nhau{"\""}
+                </p>
+              </div>
+
+              <p className="text-sm">
+                Đó là lý do chúng tôi cung cấp các giải pháp quản lý, vận hành phù hợp
+                để đáp ứng nhu cầu riêng của quý vị
+              </p>
+            </div>
+
+            {/* Action Button */}
+            <Button className="">
+              Tìm hiểu thêm
+              <ArrowRight className="w-4 h-4" />
+            </Button>
+          </div>
+          <div className="w-full" />
+        </div >
       </div >
-    </div >
+    </section>
   )
 }
 
@@ -89,8 +136,8 @@ function OurServices() {
             <p>Chúng tôi tiên phong cung cấp những giải pháp chuyên nghiệp nhưng gần gũi. Tất cả các nhân viên đều làm việc theo quy trình chặt chẽ và thái độ tận tâm.</p>
           </div>
         </div>
-        <div className="order-1 lg:order-2 relative h-72 lg:h-[420px] rounded-lg overflow-hidden shadow-2xl cursor-pointer">
-          {/* <Image alt="Dịch vụ quản lý tòa nhà chuyên nghiệp" loading="lazy" width="600" height="400" decoding="async" data-nimg="1" className="w-full h-full object-cover" src="/images/services-building.jpg" /> */}
+        <div className="order-1 lg:order-2 relative h-72 lg:h-[420px] rounded-lg overflow-hidden shadow-2xl cursor-pointer hover:scale-105 transition-all duration-300">
+          <Image alt="Dịch vụ quản lý tòa nhà chuyên nghiệp" loading="lazy" width={600} height={400} decoding="async" data-nimg="1" className="w-full h-full object-cover" src="/images/services-building.jpg" />
         </div>
       </div>
     </div>
@@ -98,20 +145,30 @@ function OurServices() {
 }
 
 function News() {
+  const router = useRouter()
+
   const news = [
     {
       id: 1,
       category: "TIN CỘNG ĐỒNG",
       year: 2024,
       header: "\"Khách sạn VIP\" cho người kém may mắn",
-      desc: "Hơn cả một khách sạn thiện nguyện, có thể gọi đây là một góc nhỏ yêu thương, nơi những người kém may mắn được chia sẻ cả vật chất lẫn tinh thần."
+      desc: "Hơn cả một khách sạn thiện nguyện, có thể gọi đây là một góc nhỏ yêu thương, nơi những người kém may mắn được chia sẻ cả vật chất lẫn tinh thần.",
+      imgSrc: "/bg-new-3.jpg",
+      customerRender: <YouTubeModal
+        trigger={({ open }) => {
+          return <Button variant="link" onClick={open}>Xem thêm <ChevronRight /> </Button>
+        }}
+      />
     },
     {
       id: 2,
       category: "TIN CỘNG ĐỒNG",
       year: 2024,
       header: "Phóng sự Nhà sáng lập Kiến An Resident",
-      desc: ""
+      desc: "",
+      imgSrc: "/bg-new-2.png",
+      onClick: () => router.push("https://portal.vtc.gov.vn/chitiet/63200-netviet-stories-23-11-2019.html")
     }
   ]
 
@@ -135,12 +192,13 @@ function News() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <h2 className="text-4xl lg:text-5xl font-playfair font-bold text-gray-900 mb-16">Tin tức nổi bật</h2>
+
       <div className="space-y-12">
         {news.map(news => {
           return (
             <div key={news.id} className="border-l-4 border-[#FF6B35] pl-6 py-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                <div className="space-y-4">
+                <div className="flex flex-col gap-4">
                   <div className="flex items-center gap-3">
                     <span className="text-[#FF6B35] font-bold text-sm">{news.category}</span>
                     <span className="text-gray-500 text-sm">{news.year}</span>
@@ -149,9 +207,12 @@ function News() {
                   <p className="text-gray-600 leading-relaxed text-base">
                     {news.desc}
                   </p>
-                  <Button variant="link">Xem thêm <ChevronRight /> </Button>
+                  {news.customerRender ? news.customerRender : <Button variant="link" onClick={news.onClick}>Xem thêm <ChevronRight /> </Button>}
                 </div>
-                {/* <Image alt="&quot;Khách sạn VIP&quot; cho người kém may mắn" loading="lazy" width="600" height="400" decoding="async" data-nimg="1" className="w-full rounded-lg shadow-md object-cover" src="/bg-new-3.jpg?t=1" /> */}
+                <Image alt="&quot;Khách sạn VIP&quot; cho người kém may mắn" loading="lazy"
+                  width={600} height={400}
+                  decoding="async" data-nimg="1"
+                  className="w-full rounded-lg shadow-md object-cover" src={news.imgSrc} />
               </div>
             </div>
           )

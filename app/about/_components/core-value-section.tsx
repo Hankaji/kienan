@@ -1,5 +1,6 @@
 import { ReactNode } from "react";
 import { LucideHeart, LucideShield, LucideAward } from "lucide-react";
+import ScrollReveal from "@/components/scroll-reveal";
 
 interface CoreValueCardProps {
   icon: ReactNode;
@@ -31,21 +32,28 @@ export default function CoreValuesSection() {
 
         {/* Grid of values */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <CoreValueCard
-            icon={<LucideHeart size={32} />}
-            title="Tận tâm"
-            description="Phục vụ khách hàng bằng cả trái tim và sự nhiệt huyết."
-          />
-          <CoreValueCard
-            icon={<LucideShield size={32} />}
-            title="Chuyên nghiệp"
-            description="Quy trình làm việc chuẩn mực, hiệu quả và minh bạch."
-          />
-          <CoreValueCard
-            icon={<LucideAward size={32} />}
-            title="Hiệu quả"
-            description="Mang lại giá trị thực tế và bền vững cho khách hàng."
-          />
+          <ScrollReveal>
+            <CoreValueCard
+              icon={<LucideHeart size={32} />}
+              title="Tận tâm"
+              description="Phục vụ khách hàng bằng cả trái tim và sự nhiệt huyết."
+            />
+          </ScrollReveal>
+          <ScrollReveal delay={0.2}>
+            <CoreValueCard
+              icon={<LucideShield size={32} />}
+              title="Chuyên nghiệp"
+              description="Quy trình làm việc chuẩn mực, hiệu quả và minh bạch."
+            />
+
+          </ScrollReveal>
+          <ScrollReveal delay={0.4}>
+            <CoreValueCard
+              icon={<LucideAward size={32} />}
+              title="Hiệu quả"
+              description="Mang lại giá trị thực tế và bền vững cho khách hàng."
+            />
+          </ScrollReveal>
         </div>
       </div>
     </section>

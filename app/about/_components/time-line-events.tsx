@@ -1,4 +1,4 @@
-import React from 'react';
+import ScrollReveal from '@/components/scroll-reveal';
 import { ArrowUp, MapPin } from 'lucide-react';
 
 interface TimelineEvent {
@@ -63,45 +63,47 @@ export default function HistoryTimeline() {
               const isRightSide = index % 2 === 0;
 
               return (
-                <div
-                  key={index}
-                  className={`relative flex flex-col md:flex-row gap-8 ${isRightSide ? 'md:flex-row-reverse' : ''}`}
-                >
-                  {/* Central Dot Marker */}
-                  <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-orange-500 rounded-full border-4 border-white shadow-md transform -translate-x-1/2 mt-1.5 z-10"></div>
+                <ScrollReveal key={index}>
+                  <div
+                    className={`relative flex flex-col md:flex-row gap-8 ${isRightSide ? 'md:flex-row-reverse' : ''}`}
+                  >
+                    {/* Central Dot Marker */}
+                    <div className="absolute left-4 md:left-1/2 w-4 h-4 bg-orange-500 rounded-full border-4 border-white shadow-md transform -translate-x-1/2 mt-1.5 z-10"></div>
 
-                  {/* Content Card */}
-                  <div className="ml-12 md:ml-0 md:w-1/2 md:px-8">
-                    <div className={`bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow ${isRightSide ? 'md:text-left' : 'md:text-right'}`}>
+                    {/* Content Card */}
+                    <div className="ml-12 md:ml-0 md:w-1/2 md:px-8">
+                      <div className={`bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow ${isRightSide ? 'md:text-left' : 'md:text-right'}`}>
 
-                      {/* Year Badge */}
-                      <span className="inline-block px-3 py-1 bg-orange-100 text-orange-600 text-sm font-bold rounded-full mb-3">
-                        {event.year}
-                      </span>
+                        {/* Year Badge */}
+                        <span className="inline-block px-3 py-1 bg-orange-100 text-orange-600 text-sm font-bold rounded-full mb-3">
+                          {event.year}
+                        </span>
 
-                      {/* Title */}
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
-                        {event.title}
-                      </h3>
+                        {/* Title */}
+                        <h3 className="text-xl font-bold text-gray-900 mb-2">
+                          {event.title}
+                        </h3>
 
-                      {/* Location / Address */}
-                      <div className={`flex items-start gap-2 text-gray-600 text-sm mb-2 justify-start ${isRightSide ? 'md:justify-start' : 'md:justify-end'}`}>
-                        {/* Icon logic: For right-aligned text (Left side cards), text comes before icon visually, or we keep icon left? 
+                        {/* Location / Address */}
+                        <div className={`flex items-start gap-2 text-gray-600 text-sm mb-2 justify-start ${isRightSide ? 'md:justify-start' : 'md:justify-end'}`}>
+                          {/* Icon logic: For right-aligned text (Left side cards), text comes before icon visually, or we keep icon left? 
                             The original design had subtle shifts. Here we keep it simple: Icon always next to text. */}
-                        <MapPin className="w-4 h-4 shrink-0 mt-0.5" />
-                        <span>{event.location}</span>
-                      </div>
+                          <MapPin className="w-4 h-4 shrink-0 mt-0.5" />
+                          <span>{event.location}</span>
+                        </div>
 
-                      {/* Description */}
-                      <p className="text-gray-500 text-sm leading-relaxed border-t border-gray-100 pt-3 mt-3">
-                        {event.description}
-                      </p>
+                        {/* Description */}
+                        <p className="text-gray-500 text-sm leading-relaxed border-t border-gray-100 pt-3 mt-3">
+                          {event.description}
+                        </p>
+                      </div>
                     </div>
+
+                    {/* Empty Spacer for the other side of the timeline */}
+                    <div className="hidden md:block md:w-1/2"></div>
                   </div>
 
-                  {/* Empty Spacer for the other side of the timeline */}
-                  <div className="hidden md:block md:w-1/2"></div>
-                </div>
+                </ScrollReveal>
               );
             })}
           </div>

@@ -2,6 +2,7 @@
 import { HeroSection } from "@/components/hero-section"
 import Image from "next/image";
 import JobDescriptionCard, { JobDescriptionCardProps } from "./_components/job-description-card";
+import ScrollReveal from "@/components/scroll-reveal";
 
 export default function Recruitment() {
   return (
@@ -81,15 +82,18 @@ function JobOppotunities() {
         </div>
         <div className="space-y-6">
           {jobList.map((job, index) => (
-            <JobDescriptionCard
-              key={index}
-              {...job}
-              onApply={() => console.log(`Applied to ${job.title}`)}
-            />
+            <ScrollReveal key={index}>
+              <JobDescriptionCard
+                {...job}
+                onApply={() => console.log(`Applied to ${job.title}`)}
+              />
+            </ScrollReveal>
           ))}
 
         </div>
-        <NoPositionFound />
+        <ScrollReveal>
+          <NoPositionFound />
+        </ScrollReveal>
       </div>
     </section>
   )

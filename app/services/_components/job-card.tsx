@@ -108,7 +108,7 @@ export default function JobCard({
 
         {/* Title */}
         <h3
-          className="font-serif absolute left-[40.5%] top-[58%] flex h-[65px] w-[85%] -translate-x-[40%] items-end text-[20px] font-bold leading-tight text-[#252839] 
+          className="absolute left-[40.5%] top-[58%] flex h-[65px] w-[85%] -translate-x-[40%] items-start text-[20px] font-bold leading-tight text-[#252839] 
           transition-all duration-500 ease-out 
           -translate-y-[80%] 
           group-hover:-translate-y-[120%] group-hover:text-yellow-400

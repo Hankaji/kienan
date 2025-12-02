@@ -198,7 +198,7 @@ function News() {
           return (
             <div key={news.id} className="border-l-4 border-[#FF6B35] pl-6 py-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 items-start">
                   <div className="flex items-center gap-3">
                     <span className="text-[#FF6B35] font-bold text-sm">{news.category}</span>
                     <span className="text-gray-500 text-sm">{news.year}</span>

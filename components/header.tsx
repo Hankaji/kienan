@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link"; // Use standard <a> if not using Next.js
-import { Menu } from "lucide-react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react"; // Added X for close icon
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { motion, AnimatePresence } from "framer-motion"; // Import Framer Motion
 
 const navLinks = [
   { href: "/about", label: "Về Chúng Tôi" },
@@ -19,6 +19,7 @@ const navLinks = [
 export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // New State for Mobile Menu
 
   // Handle Scroll: Hide on down, Show on up
   useEffect(() => {
@@ -27,6 +28,7 @@ export default function Navbar() {
 
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false); // Scrolling down
+        setIsMobileMenuOpen(false); // OPTIONAL: Close menu automatically on scroll
       } else {
         setIsVisible(true); // Scrolling up
       }
@@ -73,33 +75,49 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Mobile Navigation (Sheet) */}
+        {/* Mobile Navigation Trigger (Replaces SheetTrigger) */}
         <div className="md:hidden">
-          <Sheet>
-            <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-primary">
-                <Menu className="h-6 w-6" />
-                <span className="sr-only">Open menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right">
-              <div className="mt-8 flex flex-col gap-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="text-lg font-medium text-foreground hover:text-primary"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </SheetContent>
-          </Sheet>
+          <Button
+            variant="ghost"
+            size="icon"
+            className="text-primary"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? (
+              <X className="h-6 w-6" />
+            ) : (
+              <Menu className="h-6 w-6" />
+            )}
+            <span className="sr-only">Toggle menu</span>
+          </Button>
         </div>
-
       </div>
+
+      {/* Mobile Menu Dropdown (Replaces SheetContent) */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden overflow-hidden border-t border-border bg-background"
+          >
+            <div className="flex flex-col space-y-4 px-6 py-6 pb-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsMobileMenuOpen(false)} // Close on click
+                  className="text-lg font-medium text-foreground hover:text-primary transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 };
-

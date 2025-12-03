@@ -17,7 +17,7 @@ export function HeroSection({ header, title, desc, noVideo }: HeroSectionProps) 
         muted
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
-        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Screen-Recording-2023-11-23-at-11.06.19-Ktsc7opohTZXD1skm3MNVcihII7xI4.mp4"
+        src="/video.mp4"
       />}
 
       {/* Overlay */}

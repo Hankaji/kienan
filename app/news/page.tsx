@@ -37,7 +37,19 @@ export default function News() {
       desc: "",
       imgSrc: "/bg-new-1.jpg",
       onClick: () => router.push("https://thanhnien.vn/chuyen-tu-te-can-tho-co-khach-san-1500-dong-185887938.htm?gidzl=AGqxRlW0_o8d5J9i-1hz8ICICsxa7AjrF4OpRkD9_dGp43i-l1FmSM8TRJky7w1pR11lEpdfE_nvyW_n8G")
-    }
+    },
+    {
+      id: 4,
+      header: "\"Khách sạn\" 1.500 đồng ở Cần Thơ",
+      desc: "\"Khách sạn\" cho những hoàn cảnh khó khăn ở quận Ninh Kiều, Thành phố Cần Thơ",
+      imgSrc: "/bg-news-5.png",
+      customerRender: <YouTubeModal
+        videoId="2OET0zDrT6o"
+        trigger={({ open }) => {
+          return <Button variant="link" onClick={open}>Xem thêm <ChevronRight /> </Button>
+        }}
+      />
+    },
   ]
 
   const newsWithoutImage = [
@@ -66,7 +78,7 @@ export default function News() {
           <div className="space-y-20">
             {news.map(news => {
               return (
-                <div key={news.id} className="pl-6 py-4">
+                <div key={news.id} className="py-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
                     <div className="flex flex-col gap-4 items-start">
                       <div className="flex items-center gap-3">
@@ -88,7 +100,7 @@ export default function News() {
             })}
             {newsWithoutImage.map(news => {
               return (
-                <div key={news.id} className="pl-6 py-4">
+                <div key={news.id} className="py-4">
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
                       <span className="text-[#FF6B35] font-bold text-sm">{news.category}</span>

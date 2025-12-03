@@ -43,7 +43,7 @@ export default function JobCard({
     <Card
       // 3. Attach the Ref here
       ref={cardRef}
-      onClick={() => setIsActive(!isActive)}
+      onClick={() => setIsActive(true)}
 
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

@@ -87,7 +87,7 @@ export default function JobCard({
            group-[.is-active]:scale-95 group-[.is-active]:-translate-y-2 group-[.is-active]:-translate-x-3">
           {/* Icon Container */}
           <div
-            className="p-2 h-full w-fit transition-all duration-500 group-hover:scale-95 group-[.is-active]:scale-80"
+            className="p-2 h-full w-fit transition-all duration-500 group-hover:scale-95 group-[.is-active]:scale-95"
           >
             <Image
               width={128}
